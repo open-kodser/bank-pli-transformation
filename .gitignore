@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+
+# Frontend
+node_modules/
+dist/
+.env.local
+coverage/
+
+# Backend
+target/
+.m2/
+.idea/
+*.iml
+data/
+*.log

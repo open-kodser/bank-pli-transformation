@@ -1,0 +1,2 @@
+package com.bankpli.javabank.credit;import java.util.List;import org.springframework.stereotype.Service;
+@Service public class TrendAnalyzer {public record Trend(double real,double imaginary,double magnitude){}public Trend analyze(List<Integer>scores){if(scores==null||scores.isEmpty())throw new IllegalArgumentException("Scores are required");double re=0,im=0;for(int i=0;i<scores.size();i++){double angle=2*Math.PI*(i+1)/scores.size();re+=scores.get(i)*Math.cos(angle);im+=scores.get(i)*Math.sin(angle);}im=-im;return new Trend(re,im,Math.hypot(re,im));}}

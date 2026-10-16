@@ -1,0 +1,1 @@
+package com.bankpli.javabank.transfer;import java.math.BigDecimal;import java.util.List;public record TransferResult(String status,BigDecimal amount,BigDecimal fee,BigDecimal sourceBalance,BigDecimal targetBalance,List<String>route){}

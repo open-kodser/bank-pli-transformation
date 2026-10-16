@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:bankpli-test;DB_CLOSE_DELAY=-1;MODE=DB2
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate.ddl-auto: create-drop
+  batch.job.enabled: false
+bank:
+  system-sort-code: "100001"
+  default-currency: USD
+  seed:
+    enabled: false

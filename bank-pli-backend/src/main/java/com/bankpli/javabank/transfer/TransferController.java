@@ -1,0 +1,2 @@
+package com.bankpli.javabank.transfer;import java.math.BigDecimal;import java.util.Map;import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/transfers")public class TransferController{private final TransferService service;public TransferController(TransferService s){service=s;}@PostMapping public TransferResult execute(@RequestBody TransferRequest r){return service.execute(r);}@PostMapping("/fee")public Map<String,BigDecimal> fee(@RequestBody TransferRequest r){return Map.of("fee",service.preview(r));}}

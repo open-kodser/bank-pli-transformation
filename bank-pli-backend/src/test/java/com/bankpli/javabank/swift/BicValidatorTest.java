@@ -1,0 +1,2 @@
+package com.bankpli.javabank.swift;import static org.junit.jupiter.api.Assertions.*;import org.junit.jupiter.api.Test;
+class BicValidatorTest{private final BicValidator v=new BicValidator();@Test void documentedCases(){assertTrue(v.isValid("DEUTDEFF"));assertTrue(v.isValid("DEUTDEFF500"));assertTrue(v.isValid(" DEUTDEFF "));assertFalse(v.isValid("DEUT"));assertFalse(v.isValid("DE1TDEFF"));assertFalse(v.isValid("DEUT12FF"));assertFalse(v.isValid("DEUTDEFF5"));assertFalse(v.isValid(null));}}

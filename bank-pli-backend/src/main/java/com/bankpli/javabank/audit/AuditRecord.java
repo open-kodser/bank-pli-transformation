@@ -1,0 +1,3 @@
+package com.bankpli.javabank.audit;
+import jakarta.persistence.*;import java.time.Instant;
+@Entity @Table(name="audit_log") public class AuditRecord {@Id @GeneratedValue(strategy=GenerationType.IDENTITY)private Long id;@Column(nullable=false,updatable=false)private Instant occurredAt;@Column(nullable=false,updatable=false)private String eventType;@Column(nullable=false,updatable=false,length=2000)private String details;protected AuditRecord(){}public AuditRecord(String type,String details){this.occurredAt=Instant.now();this.eventType=type;this.details=details;}public Long getId(){return id;}public Instant getOccurredAt(){return occurredAt;}public String getEventType(){return eventType;}public String getDetails(){return details;}}

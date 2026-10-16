@@ -1,0 +1,7 @@
+package com.bankpli.javabank.account;
+import java.math.*; import java.util.*; import org.springframework.stereotype.Service;
+@Service public class MortgageCalculator {
+ public record Payment(int number,BigDecimal principal,BigDecimal interest,BigDecimal balance){}
+ public BigDecimal payment(BigDecimal principal,BigDecimal annualRate,int months){if(principal==null||annualRate==null||principal.signum()<0||annualRate.signum()<0||months<=0)throw new IllegalArgumentException("Principal/rate must be non-negative and months positive");if(annualRate.signum()==0)return principal.divide(BigDecimal.valueOf(months),2,RoundingMode.HALF_UP);MathContext mc=new MathContext(20,RoundingMode.HALF_UP);BigDecimal r=annualRate.divide(BigDecimal.valueOf(12),mc);BigDecimal f=BigDecimal.ONE.add(r).pow(months,mc);return principal.multiply(r.multiply(f,mc),mc).divide(f.subtract(BigDecimal.ONE),mc).setScale(2,RoundingMode.HALF_UP);}
+ public List<Payment> schedule(BigDecimal principal,BigDecimal annualRate,int months){BigDecimal pay=payment(principal,annualRate,months),rate=annualRate.divide(BigDecimal.valueOf(12),20,RoundingMode.HALF_UP),balance=principal;List<Payment> out=new ArrayList<>();for(int i=1;i<=months&&balance.signum()>0;i++){BigDecimal interest=balance.multiply(rate).setScale(2,RoundingMode.HALF_UP);BigDecimal principalPart=pay.subtract(interest).max(BigDecimal.ZERO);if(principalPart.compareTo(balance)>0)principalPart=balance;balance=balance.subtract(principalPart).max(BigDecimal.ZERO);out.add(new Payment(i,principalPart,interest,balance));}return out;}
+}
